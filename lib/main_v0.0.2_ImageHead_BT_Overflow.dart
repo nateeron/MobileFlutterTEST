@@ -33,7 +33,7 @@ class _MainAppState extends State<MainApp> {
       theme: ThemeData(primarySwatch: Colors.green),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("ListView Example"),
+          title: Text("ListView Example",),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.search),
@@ -77,6 +77,7 @@ class _MainAppState extends State<MainApp> {
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.brown[800],
+          unselectedItemColor: Colors.brown[200],
           onTap: _onItemTapped,
         ),
       ),
@@ -104,33 +105,41 @@ class HomePage extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: <Widget>[
-        Container(
-          height: 200.0, // Adjust the height of the slideshow
-          child: PageView.builder(
-            controller: _controller,
-            itemCount: images.length,
-            itemBuilder: (context, index) {
-              return Image.asset(
-                images[index],
-                fit: BoxFit.cover,
-              );
-            },
-          ),
+        Stack(
+          children: <Widget>[
+            Container(
+              height: 200.0, // Adjust the height of the slideshow
+              child: PageView.builder(
+                controller: _controller,
+                itemCount: images.length,
+                itemBuilder: (context, index) {
+                  return Image.asset(
+                    images[index],
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
+            ),
+            Positioned(
+              bottom:
+                  10.0, // Position the indicator at the bottom of the slideshow
+              left: 0,
+              right: 0,
+              child: Center(
+                child: SmoothPageIndicator(
+                  controller: _controller,
+                  count: images.length,
+                  effect: WormEffect(
+                    offset: 0,
+                    dotHeight: 6.0,
+                    dotWidth: 6.0,
+                    activeDotColor: Colors.brown,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        SizedBox(height: 10.0),
-        SmoothPageIndicator(
-          controller: _controller,
-          count: images.length,
-          effect: WormEffect(
-            offset: 0,
-            dotHeight: 5.0,
-            dotWidth: 10.0,
-            spacing: 0,
-            radius: 0,
-            activeDotColor: Colors.brown,
-          ),
-        ),
-        SizedBox(height: 10.0),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 5.0),
           child: Container(
@@ -166,6 +175,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Expanded(
+          
           child: ListView.builder(
             itemCount: verticalItems.length,
             itemBuilder: (context, index) {

@@ -22,12 +22,12 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
   final List<String> items = List<String>.generate(100, (i) => "Item $i");
   int _selectedIndex = 0;
- final List<Widget> _pages = [
-    HomePage(),
-    CoinPage(),
-    MessagesPage(),
-    MemberPage(),
-  ];
+//  final List<Widget> _pages = [
+//     HomePage(),
+//     CoinPage(),
+//     MessagesPage(),
+//     MemberPage(),
+//   ];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;

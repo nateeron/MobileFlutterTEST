@@ -79,6 +79,7 @@ class _MainAppState extends State<MainApp> {
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.brown[800],
+          unselectedItemColor: Colors.brown[200],
           onTap: _onItemTapped,
         ),
       ),
